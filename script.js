@@ -7,7 +7,7 @@ var y= canvas.height-30;
 // to make the small changes in such a way that ball be drawn has small changes 
 var dx=2;
 var dy=-2;
-var ballRadius =10;
+var ballRadius =25;
 var paddleHeight= 10;
 var paddleWidth= 75;
 var paddleX= (canvas.width-paddleWidth)/2;
@@ -22,17 +22,24 @@ var brickOffsetTop =30;
 var brickOffsetLeft = 30;
 var score = 0;
 var lives=3;
-
+var level=1;
+var maxLevel=4;
+var ball= new Image();
+ball.src= 'modi.png';
 
 var bricks = [];
-for(c=0; c<brickColumnCount; c++)
+function initBricks()
 {
-	bricks[c]=[];
-	for(r=0; r<brickRowCount; r++)
+	for(c=0; c<brickColumnCount; c++)
 	{
+		bricks[c]=[];
+		for(r=0; r<brickRowCount; r++)
+			{
 		bricks[c][r] = {x:0, y:0, status:1}
+			}
 	}
 }
+initBricks();
 
 document.addEventListener("keydown",keyDownHandler);
 document.addEventListener("keyup",keyUpHandler);
@@ -67,15 +74,17 @@ function keyUpHandler(e){
 	}	 
 }
 function drawBall(){
-	 		 ctx.beginPath();
- 		 	 ctx.arc(x, y, ballRadius, 0, Math.PI*2);
+	 		 //ctx.beginPath();
+	 		 ctx.drawImage(ball,x, y, ballRadius,ballRadius);
+ 		 	 //To have  a ball code ctx.arc(x, y, ballRadius, 0, Math.PI*2);
  		 	 // this idea need to be implemented ctx.text("No",x,y);
- 		 	 ctx.font = "10px Arial";
- 		 	 ctx.fillStyle = "#FF0044";
+ 		 	 //ctx.font = "10px Arial";
+ 		 	 //ctx.fillStyle = "#FF0044";
+
 			 //ctx.fillText("Say No To", x, y);
  		 	 //ctx.fillStyle = "#FF0000"; Make a seperate dwawballtext fynction preceeding draw ball   
- 		 	 ctx.fill();
- 		 	 ctx.closePath();
+ 		 	 //ctx.fill();
+ 		 	 //ctx.closePath();
 }
 function drawPaddle() {
 	ctx.beginPath();
@@ -90,6 +99,13 @@ function drawLives() {
 	ctx.fillStyle = "#0095DD";
 	ctx.fillText("Lives: "+lives, canvas.width-65, 20);
 }
+
+function drawLevel() {
+	ctx.font = "16px Arial";
+	ctx.fillStyle = "#0095DD";
+	ctx.fillText("Level: "+level, 210, 20);
+}
+
 
 
 function drawBricks() {
@@ -120,8 +136,18 @@ function collisionDetection() {
 					b.status = 0;
 					score++;
 					if(score == brickRowCount*brickColumnCount) {
-						alert("You can fight corona , Stay Home Stay Safe");
-						document.location.reload();
+						if(level < maxLevel)
+						{
+								level=level+1;
+								alert("level:"+level);
+								initBricks();
+							
+						} else 
+						{
+							alert("You can fight corona , Stay Home Stay Safe");
+							document.location.reload();
+						}
+						
 					}
 				}
 			}
@@ -138,6 +164,7 @@ function draw(){
  		 	 drawScore();
  		 	 drawLives();
  		 	 collisionDetection();
+ 		 	 drawLevel();
  		 	  		 	 if(y+dy < ballRadius)
  		 	 {
  		 	 	dy = -dy; // so basically it is using 10 because we are having radius of circle as 10 , if 0 ball is half the way inside the hboundaries as we are checking the center of the system.
