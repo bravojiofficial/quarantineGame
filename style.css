@@ -2,9 +2,17 @@
 	padding: 0;
 	margin: 0;
 }
-
+#example1 {
+  border: 2px solid black;
+  color: #FFFFFF;
+  padding: 25px;
+  background: url(960.jpg);
+  background-repeat: no-repeat;
+  background-size: auto;
+}
 #myCanvas {
 	background: #eee;
 	display: block;
+	opacity: 0.75;
 	margin: 0 auto;
 }

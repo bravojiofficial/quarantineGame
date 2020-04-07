@@ -89,7 +89,7 @@ function drawBall(){
 function drawPaddle() {
 	ctx.beginPath();
 	ctx.rect(paddleX,canvas.height-paddleHeight, paddleWidth, paddleHeight);
-	ctx.fillStyle = "#0000FF";
+	ctx.fillStyle = "#008000";
  	ctx.fill();
 	ctx.closePath();
 }
@@ -118,7 +118,7 @@ function drawBricks() {
 				bricks[c][r].y = brickY;
 				ctx.beginPath();
 				ctx.rect(brickX, brickY, brickWidth, brickHeight);
-				ctx.fillStyle = "#0095DD";
+				ctx.fillStyle = "#FA8072";
 				ctx.fill();
 				ctx.closePath();
 			}
@@ -141,6 +141,13 @@ function collisionDetection() {
 								level=level+1;
 								alert("level:"+level);
 								initBricks();
+								score =0;
+								/*dx += 1;
+								dy += 1;
+								x = canas.width/2;
+								y = canvas.height-30;
+								//start from here 
+								paddleX = (canvas.width-paddleWidth)/2;*/
 							
 						} else 
 						{
@@ -184,8 +191,8 @@ function draw(){
 							} else {
 									x = canvas.width/2;
 									y = canvas.height-30;
-									dx = 2;
-									dy = -2;
+									//dx = 2;
+									//dy = -2;
 									paddleX = (canvas.width-paddleWidth)/2;
 			}
 		}
