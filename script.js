@@ -139,7 +139,7 @@ function collisionDetection() {
 						if(level < maxLevel)
 						{
 								level=level+1;
-								alert("level:"+level);
+								//alert("level:"+level);
 								initBricks();
 								score =0;
 								/*dx += 1;
